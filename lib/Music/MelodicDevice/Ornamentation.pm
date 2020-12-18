@@ -4,7 +4,6 @@ package Music::MelodicDevice::Ornamentation;
 
 our $VERSION = '0.0204';
 
-use Carp qw(croak);
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
