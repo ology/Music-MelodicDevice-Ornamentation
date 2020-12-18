@@ -247,7 +247,7 @@ sub trill {
 
 =head2 mordent
 
-  $spec = $md->mordent($duration, $pitch, $number, $offset);
+  $spec = $md->mordent($duration, $pitch, $offset);
 
 * CURRENTLY UNIMPLEMENTED *
 
