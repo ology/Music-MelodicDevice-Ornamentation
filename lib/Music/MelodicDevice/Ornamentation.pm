@@ -151,7 +151,7 @@ sub grace_note {
     print "Grace note: $grace_note\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
-    my $y = $MIDI::Simple::Length{xn} * TICKS; # Sixtyfourth note
+    my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
     my $z = sprintf '%0.f', ($x - $y);
     print "Durations: $x, $y, $z\n" if $self->verbose;
 
