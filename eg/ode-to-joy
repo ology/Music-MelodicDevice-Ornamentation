@@ -22,6 +22,8 @@ for my $n (0 .. $#$motif) {
     $score->n($motif->[$n], $notes->[$n]);
 }
 
+$notes = [qw(E4 E4 F4 G4  G4 F4 E4 D4  C4 C4 D4 E4  D4 C4 C4)];
+
 for my $n (0 .. $#$motif) {
     if ($n == 0) {
         my $spec = $md->grace_note($motif->[$n], $notes->[$n], -1);
