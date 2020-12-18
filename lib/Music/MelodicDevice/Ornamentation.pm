@@ -298,7 +298,7 @@ __END__
 
 =head1 SEE ALSO
 
-The F<t/01-methods.t> program in this distribution
+The F<t/01-methods.t> and F<eg/*> programs in this distribution
 
 L<Data::Dumper::Compact>
 
