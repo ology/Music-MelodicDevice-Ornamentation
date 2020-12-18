@@ -154,33 +154,33 @@ sub grace_note {
 
 =head2 turn
 
-  $spec = $md->turn($duration, $pitch, $direction);
+  $spec = $md->turn($duration, $pitch, $offset);
 
 The note Above, the Principle note (the B<pitch>), the note Below, the
 Principle note again.
 
-The default B<direction> is C<1>, but if given as C<-1>, the turn is
+The default B<offset> is C<1>, but if given as C<-1>, the turn is
 "inverted" and goes: Below, Principle, Above, Principle.
 
 =cut
 
 sub turn {
-    my ($self, $duration, $pitch, $direction) = @_;
+    my ($self, $duration, $pitch, $offset) = @_;
 
-    $direction ||= 1;
+    $offset ||= 1;
 
     my ($above, $below);
 
     if ($self->scale_name eq 'chromatic') {
-        $above = Music::Note->new($pitch, 'ISO')->format('midinum') + 1;
+        $above = Music::Note->new($pitch, 'ISO')->format('midinum') + $offset;
         $above = Music::Note->new($above, 'midinum')->format('ISO');
-        $below = Music::Note->new($pitch, 'ISO')->format('midinum') - 1;
+        $below = Music::Note->new($pitch, 'ISO')->format('midinum') - $offset;
         $below = Music::Note->new($below, 'midinum')->format('ISO');
     }
     else {
         my $i = first_index { $_ eq $pitch } @{ $self->_scale };
-        $above = $self->_scale->[ $i + 1 ];
-        $below = $self->_scale->[ $i - 1 ];
+        $above = $self->_scale->[ $i + $offset ];
+        $below = $self->_scale->[ $i - $offset ];
     }
     print "Above/Below: $above / $below\n" if $self->verbose;
 
@@ -189,17 +189,7 @@ sub turn {
     print "Durations: $x, $z\n" if $self->verbose;
     $z = 'd' . $z;
 
-    my @turn;
-
-    if ($direction == 1) {
-        push @turn, [$z, $above], [$z, $pitch], [$z, $below], [$z, $pitch];
-    }
-    elsif ($direction == -1) {
-        push @turn, [$z, $below], [$z, $pitch], [$z, $above], [$z, $pitch];
-    }
-    else {
-        croak "Unknown turn direction: $direction";
-    }
+    my @turn = ([$z, $above], [$z, $pitch], [$z, $below], [$z, $pitch]);;
     print 'Turn: ', ddc(\@turn) if $self->verbose;
 
     return \@turn;
