@@ -148,8 +148,10 @@ sub grace_note {
     my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
     my $z = sprintf '%0.f', $x - $y;
     print "Durations: $x, $y, $z\n" if $self->verbose;
+    $y = 'd' . $y;
+    $z = 'd' . $z;
 
-    return [ ['d' . $y, $grace_note], ['d' . $z, $pitch] ];
+    return [ [$y, $grace_note], [$z, $pitch] ];
 }
 
 =head2 turn
