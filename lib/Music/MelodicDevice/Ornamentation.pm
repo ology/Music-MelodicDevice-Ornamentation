@@ -36,7 +36,7 @@ use constant TICKS => 96;
 =head1 DESCRIPTION
 
 C<Music::MelodicDevice::Ornamentation> provides chromatic and diatonic
-melodic ornamentation methods.
+musical melodic ornamentation methods.
 
 The duration part of the returned note specifications is actually in
 L<MIDI::Simple> C<d###> style, even though the SYNOPSIS shows them as
