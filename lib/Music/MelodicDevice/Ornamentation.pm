@@ -40,9 +40,10 @@ use constant TICKS => 96;
 C<Music::MelodicDevice::Ornamentation> provides chromatic and diatonic
 musical ornamentation methods.
 
-The duration part of the returned note specifications is in
+The duration part of the returned note specifications is actually in
 L<MIDI::Simple> C<d###> style, even though the SYNOPSIS shows them as
-L<MIDI::Simple> abbreviations.  This is for conceptual reasons only.
+L<MIDI::Simple> and L<Music::Durations> abbreviations.  This is for
+conceptual reasons only.
 
 =head1 ATTRIBUTES
 
