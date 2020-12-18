@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Improve documentation.
+    - Add tests!
 
 0.0100 2020-12-17 18:27:16
     - Mint with Dist::Zilla.
