@@ -22,17 +22,17 @@ use constant TICKS => 96;
 
   # Chromatic
   my $md = Music::MelodicDevice::Ornamentation->new;
-  my $spec = $md->grace_note('qn', 'D5', 1); # [[xn D#5], [d90 D5]]
-  $spec = $md->turn('qn', 'D5', 1);          # [[sn D#5], [sn D5], [sn C#5], [sn D5]]
-  $spec = $md->trill('qn', 'D5', 2, 1);      # [[sn D#5], [sn D5], [sn D#5], [sn D5]]
-  $spec = $md->mordent('qn', 'D5', 1);       # [[yn D5], [yn D#5], [den D5]]
+  my $spec = $md->grace_note('qn', 'D5', 1);
+  $spec = $md->turn('qn', 'D5', 1);
+  $spec = $md->trill('qn', 'D5', 2, 1);
+  $spec = $md->mordent('qn', 'D5', 1);
 
   # Diatonic
   $md = Music::MelodicDevice::Ornamentation->new(scale_name => 'major');
-  $spec = $md->grace_note('qn', 'D5', 1); # [[xn E5], [d90 D5]]
-  $spec = $md->turn('qn', 'D5', 1);       # [[sn E5], [sn D5], [sn C5], [sn D5]]
-  $spec = $md->trill('qn', 'D5', 2, 1);   # [[sn E5], [sn D5], [sn E5], [sn D5]]
-  $spec = $md->mordent('qn', 'D5', 1);    # [[yn D5], [yn E5], [den D5]]
+  $spec = $md->grace_note('qn', 'D5', 1);
+  $spec = $md->turn('qn', 'D5', 1);
+  $spec = $md->trill('qn', 'D5', 2, 1);
+  $spec = $md->mordent('qn', 'D5', 1);
 
 =head1 DESCRIPTION
 
