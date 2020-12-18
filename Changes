@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Slow down the grace-note to a thrirty-second.
+    - Clean-up code a bit.
 
 0.0204 2020-12-18 07:54:23
     - Fix the mordent divisions.
