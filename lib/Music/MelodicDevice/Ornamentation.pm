@@ -204,7 +204,7 @@ A trill is a B<number> of pairs of notes spread over a given
 B<duration>.  The first of the pair being the given B<pitch> and the
 second one given by the B<offset>.
 
-Default number: C<4>
+Default number: C<2>
 
 Default offset: C<1>
 
@@ -213,7 +213,7 @@ Default offset: C<1>
 sub trill {
     my ($self, $duration, $pitch, $number, $offset) = @_;
 
-    $number ||= 4;
+    $number ||= 2;
     $offset //= 1;
 
     my $alt;
