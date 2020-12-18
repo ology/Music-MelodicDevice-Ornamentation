@@ -2,7 +2,7 @@ package Music::MelodicDevice::Ornamentation;
 
 # ABSTRACT: Chromatic and diatonic musical ornamentation
 
-our $VERSION = '0.0200';
+our $VERSION = '0.0201';
 
 use Carp qw(croak);
 use Data::Dumper::Compact qw(ddc);
