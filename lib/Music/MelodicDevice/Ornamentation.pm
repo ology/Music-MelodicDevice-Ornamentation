@@ -247,10 +247,13 @@ sub trill {
 
 =head2 mordent
 
-  $spec = $md->mordent($duration, $pitch, $offset);
+  $spec = $md->mordent($duration, $pitch, $direction);
 
 "A rapid alternation between an indicated note [the B<pitch>], the
 note above or below, and the indicated note again."
+
+A B<direction> of C<1> (the default) returns an upper mordent.  A
+B<direction> of C<-1> returns a lower mordent.
 
 So if the B<pitch> is C<D5>, a diatonic upper mordent would be
 C<D5-E5-D5>.  A chromatic lower mordent would be C<D5-C#5-D5>.
