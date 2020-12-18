@@ -249,16 +249,56 @@ sub trill {
 
   $spec = $md->mordent($duration, $pitch, $offset);
 
-* CURRENTLY UNIMPLEMENTED *
-
 "A rapid alternation between an indicated note [the B<pitch>], the
 note above or below, and the indicated note again."
+
+So if the B<pitch> is C<D5>, a diatonic upper mordent would be
+C<D5-E5-D5>.  A chromatic lower mordent would be C<D5-C#5-D5>.
 
 =cut
 
 sub mordent {
-    my ($self, $duration, $pitch, $offset) = @_;
+    my ($self, $duration, $pitch, $direction) = @_;
+
+    $direction ||= 1;
+
+    my ($above, $below);
+
+    if ($self->scale_name eq 'chromatic') {
+        $above = Music::Note->new($pitch, 'ISO')->format('midinum') + 1;
+        $above = Music::Note->new($above, 'midinum')->format('ISO');
+        $below = Music::Note->new($pitch, 'ISO')->format('midinum') - 1;
+        $below = Music::Note->new($below, 'midinum')->format('ISO');
+    }
+    else {
+        my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+        $above = $self->_scale->[ $i + 1 ];
+        $below = $self->_scale->[ $i - 1 ];
+    }
+    print "Above/Below: $above / $below\n" if $self->verbose;
+
+    my $x = $MIDI::Simple::Length{$duration} * TICKS;
+    my $z = sprintf '%0.f', $x / 8;
+    my $y = sprintf '%0.f', $x - $z;
+    print "Durations: $x, $z, $y\n" if $self->verbose;
+    $z = 'd' . $z;
+    $y = 'd' . $y;
+
     my @mordent;
+
+    push @mordent, [$z, $pitch];
+    if ($direction == 1) {
+        push @mordent, [$z, $above];
+    }
+    elsif ($direction == -1) {
+        push @mordent, [$z, $below];
+    }
+    else {
+        croak "Unknown turn direction: $direction";
+    }
+    push @mordent, [$y, $pitch];
+    print 'Mordent: ', ddc(\@mordent) if $self->verbose;
+
     return \@mordent;
 }
 
