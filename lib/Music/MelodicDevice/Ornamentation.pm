@@ -152,7 +152,7 @@ sub grace_note {
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
-    my $z = sprintf '%0.f', ($x - $y);
+    my $z = sprintf '%0.f', $x - $y;
     print "Durations: $x, $y, $z\n" if $self->verbose;
 
     return [ ['d' . $y, $grace_note], ['d' . $z, $pitch] ];
@@ -173,6 +173,7 @@ The default B<offset> is C<1>, but if given as C<-1>, the turn is
 sub turn {
     my ($self, $duration, $pitch, $offset) = @_;
 
+    my $number = 4;
     $offset //= 1;
 
     my ($above, $below);
@@ -191,7 +192,7 @@ sub turn {
     print "Above/Below: $above / $below\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
-    my $z = sprintf '%0.f', ($x / 4);
+    my $z = sprintf '%0.f', $x / $number;
     print "Durations: $x, $z\n" if $self->verbose;
     $z = 'd' . $z;
 
