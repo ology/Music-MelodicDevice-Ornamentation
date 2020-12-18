@@ -1,6 +1,9 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Improve documentation.
+
+0.0200 2020-12-17 20:41:09
     - Implement, document and test the ->mordent method.
 
 0.0101 2020-12-17 18:52:48
