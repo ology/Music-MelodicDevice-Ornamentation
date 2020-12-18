@@ -186,7 +186,6 @@ sub turn {
         $above = $self->_scale->[ $i + $offset ];
         $below = $self->_scale->[ $i - $offset ];
     }
-    print "Above/Below: $above / $below\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', $x / $number;
@@ -229,7 +228,6 @@ sub trill {
         my $i = first_index { $_ eq $pitch } @{ $self->_scale };
         $alt = $self->_scale->[ $i + $offset ];
     }
-    print "Alternate note: $alt\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', ($x / $number / 2);
@@ -273,7 +271,6 @@ sub mordent {
         my $i = first_index { $_ eq $pitch } @{ $self->_scale };
         $alt = $self->_scale->[ $i + $offset ];
     }
-    print "Alternate note: $alt\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = sprintf '%0.f', $x / 4;
