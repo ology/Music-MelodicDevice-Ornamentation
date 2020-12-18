@@ -259,6 +259,7 @@ C<D5 E5 D5>.  A chromatic lower mordent would be C<D5 C#5 D5>.
 sub mordent {
     my ($self, $duration, $pitch, $offset) = @_;
 
+    my $number = 4;
     $offset //= 1;
 
     my $alt;
@@ -273,7 +274,7 @@ sub mordent {
     }
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
-    my $y = sprintf '%0.f', $x / 4;
+    my $y = sprintf '%0.f', $x / $number;
     my $z = sprintf '%0.f', $x - (2 * $y);
     print "Durations: $x, $y, $z\n" if $self->verbose;
     $y = 'd' . $y;
