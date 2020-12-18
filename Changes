@@ -4,6 +4,7 @@ Revision history for Music-MelodicDevice-Ornamentation
     - Slow down the grace-note to a thrirty-second.
     - Clean-up code a bit.
     - Drop the Carp module since we don't croak anymore.
+    - Drop the misleading response comments in the SYNOPSIS - Read the test instead.
 
 0.0204 2020-12-18 07:54:23
     - Fix the mordent divisions.
