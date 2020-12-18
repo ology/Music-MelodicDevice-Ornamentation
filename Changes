@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Clean-up code a bit...
 
 0.0207 2020-12-18 13:54:46
     - Improve the eg/ode-to-joy program majorly.
