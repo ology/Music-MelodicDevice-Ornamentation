@@ -32,6 +32,13 @@ $expect = [['d24','D5'], ['d24','C#5'], ['d24','D5'], ['d24','C#5']];
 $got = $obj->trill('qn', 'D5', 2, -1);
 is_deeply $got, $expect, 'trill below';
 
+$expect = [['d12','D5'], ['d12','D#5'], ['d72','D5']];
+$got = $obj->mordent('qn', 'D5', 1);
+is_deeply $got, $expect, 'mordent upper';
+$expect = [['d12','D5'], ['d12','C#5'], ['d72','D5']];
+$got = $obj->mordent('qn', 'D5', -1);
+is_deeply $got, $expect, 'mordent lower';
+
 $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [ scale_name => 'major' ];
 
 $expect = [['d6', 'E5'], ['d90', 'D5']];
@@ -57,5 +64,12 @@ is_deeply $got, $expect, 'trill above';
 $expect = [['d24','D5'], ['d24','C5'], ['d24','D5'], ['d24','C5']];
 $got = $obj->trill('qn', 'D5', 2, -1);
 is_deeply $got, $expect, 'trill below';
+
+$expect = [['d12','D5'], ['d12','E5'], ['d72','D5']];
+$got = $obj->mordent('qn', 'D5', 1);
+is_deeply $got, $expect, 'mordent upper';
+$expect = [['d12','D5'], ['d12','C5'], ['d72','D5']];
+$got = $obj->mordent('qn', 'D5', -1);
+is_deeply $got, $expect, 'mordent lower';
 
 done_testing();
