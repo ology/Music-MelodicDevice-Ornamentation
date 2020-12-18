@@ -247,13 +247,13 @@ sub trill {
 
 =head2 mordent
 
-  $spec = $md->mordent($duration, $pitch, $direction);
+  $spec = $md->mordent($duration, $pitch, $offset);
 
 "A rapid alternation between an indicated note [the B<pitch>], the
 note above or below, and the indicated note again."
 
-A B<direction> of C<1> (the default) returns an upper mordent.  A
-B<direction> of C<-1> returns a lower mordent.
+An B<offset> of C<1> (the default) returns an upper mordent one pitch
+away.  An B<offset> of C<-1> returns a lower mordent.
 
 So if the B<pitch> is C<D5>, a diatonic upper mordent would be
 C<D5-E5-D5>.  A chromatic lower mordent would be C<D5-C#5-D5>.
@@ -261,24 +261,21 @@ C<D5-E5-D5>.  A chromatic lower mordent would be C<D5-C#5-D5>.
 =cut
 
 sub mordent {
-    my ($self, $duration, $pitch, $direction) = @_;
+    my ($self, $duration, $pitch, $offset) = @_;
 
-    $direction ||= 1;
+    $offset ||= 1;
 
-    my ($above, $below);
+    my $alt;
 
     if ($self->scale_name eq 'chromatic') {
-        $above = Music::Note->new($pitch, 'ISO')->format('midinum') + 1;
-        $above = Music::Note->new($above, 'midinum')->format('ISO');
-        $below = Music::Note->new($pitch, 'ISO')->format('midinum') - 1;
-        $below = Music::Note->new($below, 'midinum')->format('ISO');
+        $alt = Music::Note->new($pitch, 'ISO')->format('midinum') + $offset;
+        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
     }
     else {
         my $i = first_index { $_ eq $pitch } @{ $self->_scale };
-        $above = $self->_scale->[ $i + 1 ];
-        $below = $self->_scale->[ $i - 1 ];
+        $alt = $self->_scale->[ $i + $offset ];
     }
-    print "Above/Below: $above / $below\n" if $self->verbose;
+    print "Alternate note: $alt\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', $x / 8;
@@ -289,17 +286,7 @@ sub mordent {
 
     my @mordent;
 
-    push @mordent, [$z, $pitch];
-    if ($direction == 1) {
-        push @mordent, [$z, $above];
-    }
-    elsif ($direction == -1) {
-        push @mordent, [$z, $below];
-    }
-    else {
-        croak "Unknown turn direction: $direction";
-    }
-    push @mordent, [$y, $pitch];
+    push @mordent, [$z, $pitch], [$z, $alt], [$y, $pitch];
     print 'Mordent: ', ddc(\@mordent) if $self->verbose;
 
     return \@mordent;
