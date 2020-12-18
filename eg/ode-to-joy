@@ -47,8 +47,6 @@ for my $n (0 .. $#$motif) {
     else {
         $score->n(@note);
     }
-
-    undef $spec;
 }
 
 $score->write_score("$0.mid");
