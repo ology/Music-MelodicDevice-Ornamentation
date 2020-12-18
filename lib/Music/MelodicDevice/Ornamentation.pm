@@ -98,6 +98,8 @@ sub _build__scale {
 
 Default: C<0>
 
+Show the progress of the methods.
+
 =cut
 
 has verbose => (
