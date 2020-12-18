@@ -21,6 +21,9 @@ is_deeply $got, $expect, 'grace_note below';
 $expect = [['d24','D#5'], ['d24','D5'], ['d24','C#5'], ['d24','D5']];
 $got = $obj->turn('qn', 'D5', 1);
 is_deeply $got, $expect, 'turn';
+$expect = [['d24','C#5'], ['d24','D5'], ['d24','D#5'], ['d24','D5']];
+$got = $obj->turn('qn', 'D5', -1);
+is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','D#5'], ['d24','D5'], ['d24','D#5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
@@ -41,6 +44,9 @@ is_deeply $got, $expect, 'grace_note below';
 $expect = [['d24','E5'], ['d24','D5'], ['d24','C5'], ['d24','D5']];
 $got = $obj->turn('qn', 'D5', 1);
 is_deeply $got, $expect, 'turn';
+$expect = [['d24','C5'], ['d24','D5'], ['d24','E5'], ['d24','D5']];
+$got = $obj->turn('qn', 'D5', -1);
+is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','E5'], ['d24','D5'], ['d24','E5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
