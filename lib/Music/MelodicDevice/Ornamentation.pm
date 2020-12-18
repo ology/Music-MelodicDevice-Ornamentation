@@ -20,16 +20,9 @@ use constant TICKS => 96;
 
   use Music::MelodicDevice::Ornamentation;
 
-  # Chromatic
-  my $md = Music::MelodicDevice::Ornamentation->new;
+  my $md = Music::MelodicDevice::Ornamentation->new; # chromatic
+  $md = Music::MelodicDevice::Ornamentation->new(scale_name => 'major'); # diatonic
   my $spec = $md->grace_note('qn', 'D5', 1);
-  $spec = $md->turn('qn', 'D5', 1);
-  $spec = $md->trill('qn', 'D5', 2, 1);
-  $spec = $md->mordent('qn', 'D5', 1);
-
-  # Diatonic
-  $md = Music::MelodicDevice::Ornamentation->new(scale_name => 'major');
-  $spec = $md->grace_note('qn', 'D5', 1);
   $spec = $md->turn('qn', 'D5', 1);
   $spec = $md->trill('qn', 'D5', 2, 1);
   $spec = $md->mordent('qn', 'D5', 1);
