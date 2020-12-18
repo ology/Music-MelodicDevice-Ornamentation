@@ -299,8 +299,6 @@ __END__
 
 The F<t/01-methods.t> program in this distribution
 
-L<Carp>
-
 L<Data::Dumper::Compact>
 
 L<List::SomeUtils>
