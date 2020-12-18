@@ -7,7 +7,7 @@ use lib map { "$ENV{HOME}/sandbox/$_/lib" } qw(MIDI-Util);
 use MIDI::Util;
 use Music::MelodicDevice::Ornamentation;
 
-my $score = MIDI::Util::setup_score(patch => 69);
+my $score = MIDI::Util::setup_score(patch => 68);
 
 my $md = Music::MelodicDevice::Ornamentation->new(
     scale_note => 'C',
