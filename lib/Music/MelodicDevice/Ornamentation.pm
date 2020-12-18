@@ -1,6 +1,6 @@
 package Music::MelodicDevice::Ornamentation;
 
-# ABSTRACT: Chromatic and diatonic musical ornamentation
+# ABSTRACT: Chromatic and diatonic melodic ornamentation
 
 our $VERSION = '0.0205';
 
@@ -36,7 +36,7 @@ use constant TICKS => 96;
 =head1 DESCRIPTION
 
 C<Music::MelodicDevice::Ornamentation> provides chromatic and diatonic
-musical ornamentation methods.
+melodic ornamentation methods.
 
 The duration part of the returned note specifications is actually in
 L<MIDI::Simple> C<d###> style, even though the SYNOPSIS shows them as
