@@ -141,7 +141,6 @@ sub grace_note {
         my $i = first_index { $_ eq $pitch } @{ $self->_scale };
         $grace_note = $self->_scale->[ $i + $offset ];
     }
-    print "Grace note: $grace_note\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
@@ -150,7 +149,10 @@ sub grace_note {
     $y = 'd' . $y;
     $z = 'd' . $z;
 
-    return [ [$y, $grace_note], [$z, $pitch] ];
+    my @grace_note = ([$y, $grace_note], [$z, $pitch]);
+    print 'Grace note: ', ddc(\@grace_note) if $self->verbose;
+
+    return \@grace_note;
 }
 
 =head2 turn
