@@ -27,7 +27,10 @@ is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','D#5'], ['d24','D5'], ['d24','D#5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
-is_deeply $got, $expect, 'trill';
+is_deeply $got, $expect, 'trill above';
+$expect = [['d24','D5'], ['d24','C#5'], ['d24','D5'], ['d24','C#5']];
+$got = $obj->trill('qn', 'D5', 2, -1);
+is_deeply $got, $expect, 'trill below';
 
 $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [ scale_name => 'major' ];
 
@@ -50,6 +53,9 @@ is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','E5'], ['d24','D5'], ['d24','E5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
-is_deeply $got, $expect, 'trill';
+is_deeply $got, $expect, 'trill above';
+$expect = [['d24','D5'], ['d24','C5'], ['d24','D5'], ['d24','C5']];
+$got = $obj->trill('qn', 'D5', 2, -1);
+is_deeply $got, $expect, 'trill below';
 
 done_testing();
