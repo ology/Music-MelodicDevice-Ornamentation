@@ -278,15 +278,15 @@ sub mordent {
     print "Alternate note: $alt\n" if $self->verbose;
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
-    my $z = sprintf '%0.f', $x / 4;
-    my $y = sprintf '%0.f', $x - (2 * $z);
-    print "Durations: $x, $z, $y\n" if $self->verbose;
-    $z = 'd' . $z;
+    my $y = sprintf '%0.f', $x / 4;
+    my $z = sprintf '%0.f', $x - (2 * $y);
+    print "Durations: $x, $y, $z\n" if $self->verbose;
     $y = 'd' . $y;
+    $z = 'd' . $z;
 
     my @mordent;
 
-    push @mordent, [$z, $pitch], [$z, $alt], [$y, $pitch];
+    push @mordent, [$y, $pitch], [$y, $alt], [$z, $pitch];
     print 'Mordent: ', ddc(\@mordent) if $self->verbose;
 
     return \@mordent;
