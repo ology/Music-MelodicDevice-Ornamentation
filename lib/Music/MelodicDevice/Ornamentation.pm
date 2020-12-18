@@ -124,6 +124,8 @@ Create a new C<Music::MelodicDevice::Ornamentation> object.
 
   $spec = $md->grace_note($duration, $pitch, $offset);
 
+Default offset: C<1>
+
 "Appoggiatura" means emphasis on the grace note.  "Acciaccatura" means
 emphasis on the main note.  This module doesn't accent notes.  You'll
 have to do that bit.
@@ -132,6 +134,8 @@ have to do that bit.
 
 sub grace_note {
     my ($self, $duration, $pitch, $offset) = @_;
+
+    $offset ||= 1;
 
     my $grace_note;
     if ($self->scale_name eq 'chromatic') {
@@ -202,6 +206,10 @@ sub turn {
 A trill is a B<number> of pairs of notes spread over a given
 B<duration>.  The first of the pair being the given B<pitch> and the
 second one given by the B<offset>.
+
+Default number: C<4>
+
+Default offset: C<1>
 
 =cut
 
