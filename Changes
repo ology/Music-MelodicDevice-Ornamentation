@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Improve documentation.
+    - Improve the eg/ode-to-joy program slightly.
 
 0.0205 2020-12-18 09:21:11
     - Slow down the grace-note to a thrirty-second.
