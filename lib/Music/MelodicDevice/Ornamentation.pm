@@ -279,7 +279,7 @@ sub mordent {
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', $x / 8;
-    my $y = sprintf '%0.f', $x - $z;
+    my $y = sprintf '%0.f', $x - (2 * $z);
     print "Durations: $x, $z, $y\n" if $self->verbose;
     $z = 'd' . $z;
     $y = 'd' . $y;
