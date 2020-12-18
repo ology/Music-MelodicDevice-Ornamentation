@@ -253,7 +253,7 @@ An B<offset> of C<1> (the default) returns an upper mordent one pitch
 away.  An B<offset> of C<-1> returns a lower mordent.
 
 So if the B<pitch> is C<D5>, a diatonic upper mordent would be
-C<D5-E5-D5>.  A chromatic lower mordent would be C<D5-C#5-D5>.
+C<D5 E5 D5>.  A chromatic lower mordent would be C<D5 C#5 D5>.
 
 =cut
 
