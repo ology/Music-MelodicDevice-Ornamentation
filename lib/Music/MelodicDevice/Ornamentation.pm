@@ -137,7 +137,7 @@ have to do that bit.
 sub grace_note {
     my ($self, $duration, $pitch, $offset) = @_;
 
-    $offset ||= 1;
+    $offset //= 1;
 
     my $grace_note;
     if ($self->scale_name eq 'chromatic') {
@@ -173,7 +173,7 @@ The default B<offset> is C<1>, but if given as C<-1>, the turn is
 sub turn {
     my ($self, $duration, $pitch, $offset) = @_;
 
-    $offset ||= 1;
+    $offset //= 1;
 
     my ($above, $below);
 
@@ -219,7 +219,7 @@ sub trill {
     my ($self, $duration, $pitch, $number, $offset) = @_;
 
     $number ||= 4;
-    $offset ||= 1;
+    $offset //= 1;
 
     my $alt;
 
@@ -263,7 +263,7 @@ C<D5-E5-D5>.  A chromatic lower mordent would be C<D5-C#5-D5>.
 sub mordent {
     my ($self, $duration, $pitch, $offset) = @_;
 
-    $offset ||= 1;
+    $offset //= 1;
 
     my $alt;
 
