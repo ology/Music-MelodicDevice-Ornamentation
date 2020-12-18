@@ -1,6 +1,10 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Simplify ->turn logic.
+    - Improve documentation.
+
+0.0201 2020-12-17 21:08:10
     - Improve documentation.
     - Fix ->mordent logic big-time.
 
