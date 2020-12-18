@@ -1,6 +1,8 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Fix mordent division denominator.
+    - Add the eg/ode-to-joy program.
 
 0.0203 2020-12-18 07:16:15
     - Improve documentation.
