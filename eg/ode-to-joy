@@ -42,9 +42,11 @@ for my $n (0 .. $#$motif) {
     }
 
     if ($spec) {
+        $spec = [ map { [ MIDI::Util::midi_format(@$_) ] } @$spec ];
         $score->n(@$_) for @$spec;
     }
     else {
+        @note = MIDI::Util::midi_format(@note);
         $score->n(@note);
     }
 }
