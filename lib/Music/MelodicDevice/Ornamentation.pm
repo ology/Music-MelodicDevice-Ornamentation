@@ -9,7 +9,6 @@ use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
 use Music::Duration;
 use Music::Scales qw(get_scale_notes is_scale);
-use Music::Note;
 use Moo;
 use strictures 2;
 use namespace::clean;
@@ -132,15 +131,8 @@ sub grace_note {
 
     $offset //= 1;
 
-    my $grace_note;
-    if ($self->scale_name eq 'chromatic') {
-        my $note = Music::Note->new($pitch, 'ISO')->format('midinum') + $offset;
-        $grace_note = Music::Note->new($note, 'midinum')->format('ISO');
-    }
-    else {
-        my $i = first_index { $_ eq $pitch } @{ $self->_scale };
-        $grace_note = $self->_scale->[ $i + $offset ];
-    }
+    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    my $grace_note = $self->_scale->[ $i + $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
@@ -173,19 +165,9 @@ sub turn {
     my $number = 4;
     $offset //= 1;
 
-    my ($above, $below);
-
-    if ($self->scale_name eq 'chromatic') {
-        $above = Music::Note->new($pitch, 'ISO')->format('midinum') + $offset;
-        $above = Music::Note->new($above, 'midinum')->format('ISO');
-        $below = Music::Note->new($pitch, 'ISO')->format('midinum') - $offset;
-        $below = Music::Note->new($below, 'midinum')->format('ISO');
-    }
-    else {
-        my $i = first_index { $_ eq $pitch } @{ $self->_scale };
-        $above = $self->_scale->[ $i + $offset ];
-        $below = $self->_scale->[ $i - $offset ];
-    }
+    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    my $above = $self->_scale->[ $i + $offset ];
+    my $below = $self->_scale->[ $i - $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', $x / $number;
@@ -218,16 +200,8 @@ sub trill {
     $number ||= 2;
     $offset //= 1;
 
-    my $alt;
-
-    if ($self->scale_name eq 'chromatic') {
-        $alt = Music::Note->new($pitch, 'ISO')->format('midinum') + $offset;
-        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
-    }
-    else {
-        my $i = first_index { $_ eq $pitch } @{ $self->_scale };
-        $alt = $self->_scale->[ $i + $offset ];
-    }
+    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    my $alt = $self->_scale->[ $i + $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', ($x / $number / 2);
@@ -262,16 +236,8 @@ sub mordent {
     my $number = 4;
     $offset //= 1;
 
-    my $alt;
-
-    if ($self->scale_name eq 'chromatic') {
-        $alt = Music::Note->new($pitch, 'ISO')->format('midinum') + $offset;
-        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
-    }
-    else {
-        my $i = first_index { $_ eq $pitch } @{ $self->_scale };
-        $alt = $self->_scale->[ $i + $offset ];
-    }
+    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    my $alt = $self->_scale->[ $i + $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = sprintf '%0.f', $x / $number;
