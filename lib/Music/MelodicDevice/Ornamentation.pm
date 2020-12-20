@@ -86,6 +86,25 @@ sub _build__scale {
     return \@with_octaves;
 }
 
+has _enharmonics => (
+    is        => 'lazy',
+    init_args => undef,
+);
+
+sub _build__enharmonics {
+  my ($self) = @_;
+  my %enharmonics = (
+      'C#' => 'Db',
+      'D#' => 'Eb',
+      'E#' => 'F',
+      'F#' => 'Gb',
+      'G#' => 'Ab',
+      'A#' => 'Bb',
+      'B#' => 'C',
+  );
+  return { %enharmonics, reverse %enharmonics }
+}
+
 =head2 verbose
 
 Default: C<0>
@@ -131,7 +150,7 @@ sub grace_note {
 
     $offset //= 1;
 
-    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    (my $i, $pitch) = $self->_find_pitch($pitch);
     my $grace_note = $self->_scale->[ $i + $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
@@ -165,7 +184,7 @@ sub turn {
     my $number = 4;
     $offset //= 1;
 
-    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    (my $i, $pitch) = $self->_find_pitch($pitch);
     my $above = $self->_scale->[ $i + $offset ];
     my $below = $self->_scale->[ $i - $offset ];
 
@@ -200,7 +219,7 @@ sub trill {
     $number ||= 2;
     $offset //= 1;
 
-    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
@@ -236,7 +255,7 @@ sub mordent {
     my $number = 4;
     $offset //= 1;
 
-    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
@@ -252,6 +271,17 @@ sub mordent {
     print 'Mordent: ', ddc(\@mordent) if $self->verbose;
 
     return \@mordent;
+}
+
+sub _find_pitch {
+    my ($self, $pitch) = @_;
+    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    if ($i == -1) {
+        my $enharmonics = $self->_enharmonics;
+        $pitch =~ s/^([A-G][#b]?)(\d+)$/$enharmonics->{$1}$2/;
+        $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    }
+    return $i, $pitch;
 }
 
 1;

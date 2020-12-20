@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Find enharmonic pitches if not found the first time.
 
 0.0300 2020-12-19 06:53:18
     - Remove the redundant "chromatic" logic.
