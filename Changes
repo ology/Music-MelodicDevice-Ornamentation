@@ -1,6 +1,8 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+
+0.0300 2020-12-19 06:53:18
     - Remove the redundant "chromatic" logic.
     - Drop the dependency on Music::Note.
 
