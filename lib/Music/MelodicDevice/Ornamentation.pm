@@ -230,6 +230,7 @@ sub trill {
     my @trill;
 
     push @trill, [$z, $pitch], [$z, $alt] for 1 .. $number;
+    print 'Trill: ', ddc(\@trill) if $self->verbose;
 
     return \@trill;
 }
