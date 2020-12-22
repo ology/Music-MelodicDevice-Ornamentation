@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Show the trill if verbose.
+    - Improve documentation.
 
 0.0400 2020-12-19 18:45:13
     - Find enharmonic pitches if not found the first time.
