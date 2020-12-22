@@ -37,6 +37,13 @@ use constant TICKS => 96;
 C<Music::MelodicDevice::Ornamentation> provides chromatic and diatonic
 musical melodic ornamentation methods.
 
+Each returns a note-set specification.  This specification is a list
+of two part array-references: a B<duration> and a B<pitch>.  The list
+B<duration> component is a division of the given duration argument,
+and is based on the arithmetic of each ornament.  The list B<pitch>
+varies around the given pitch argument, and also depends on the
+particular ornament re-phrasing.
+
 =head1 ATTRIBUTES
 
 =head2 scale_note
