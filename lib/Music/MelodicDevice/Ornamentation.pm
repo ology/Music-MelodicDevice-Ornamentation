@@ -287,8 +287,8 @@ sub mordent {
 
   $spec = $md->slide($duration, $from, $to);
 
-Play each note in the C<chromatic> scale between B<from> and B<to> for
-the given B<duration>.
+Play each note in the C<chromatic> scale between the B<from> and B<to>
+pitches, for the given B<duration>.
 
 =cut
 
