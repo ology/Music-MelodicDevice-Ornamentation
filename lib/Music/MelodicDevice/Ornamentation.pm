@@ -51,6 +51,7 @@ to audio, it is handy to know that the pitches in these specifications
 can be translated to a readable format like this:
 
   $spec = [ map { [ MIDI::Util::midi_format(@$_) ] } @$spec ];
+  $score->n(@$_) for @$spec;
 
 =head1 ATTRIBUTES
 
