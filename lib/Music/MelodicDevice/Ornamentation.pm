@@ -297,6 +297,8 @@ sub mordent {
 Play each note in the C<chromatic> scale between the B<from> and B<to>
 pitches, for the given B<duration>.
 
+This ornament is also known as the "glissando."
+
 =cut
 
 sub slide {
