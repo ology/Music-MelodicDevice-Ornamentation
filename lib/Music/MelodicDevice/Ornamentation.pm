@@ -47,8 +47,8 @@ can vary around the given pitch argument by the given offset, and also
 depends on the particular ornament re-phrasing.
 
 Since the point is likely to use MIDI-Perl to render these ornaments,
-to audio, it is handy to know that these specifications can be
-translated to a readable format like this:
+to audio, it is handy to know that the pitches in these specifications
+can be translated to a readable format like this:
 
   $spec = [ map { [ MIDI::Util::midi_format(@$_) ] } @$spec ];
 
