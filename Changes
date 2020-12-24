@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Use Carp and croak if a pitch cannot be found in a scale.
+    - Improve documentation slightly.
 
 0.0500 2020-12-24 11:19:06
     - Add a ->slide (AKA "glissando") ornament method.
