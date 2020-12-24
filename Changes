@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Improve documentation.
 
 0.0501 2020-12-24 11:45:38
     - Use Carp and croak if a pitch cannot be found in a scale.
