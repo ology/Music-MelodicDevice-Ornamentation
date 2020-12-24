@@ -2,7 +2,7 @@ package Music::MelodicDevice::Ornamentation;
 
 # ABSTRACT: Chromatic and diatonic melodic ornamentation
 
-our $VERSION = '0.0401';
+our $VERSION = '0.0500';
 
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
@@ -31,6 +31,7 @@ use constant TICKS => 96;
   $spec = $md->turn('qn', 'D5', 1);
   $spec = $md->trill('qn', 'D5', 2, 1);
   $spec = $md->mordent('qn', 'D5', 1);
+  $spec = $md->slide('qn', 'D5', 'F5');
 
 =head1 DESCRIPTION
 
@@ -281,13 +282,55 @@ sub mordent {
     return \@mordent;
 }
 
+=head2 slide
+
+  $spec = $md->slide($duration, $from, $to);
+
+Play each note in the C<chromatic> scale between B<from> and B<to> for
+the given B<duration>.
+
+=cut
+
+sub slide {
+    my ($self, $duration, $from, $to) = @_;
+
+    my @scale = get_scale_notes($self->scale_note, 'chromatic');
+    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. 10;
+
+    (my $i, $from) = $self->_find_pitch($from, \@with_octaves);
+    (my $j, $to) = $self->_find_pitch($to, \@with_octaves);
+
+    my ($start, $end);
+    if ($i <= $j) {
+        $start = $i;
+        $end = $j;
+    }
+    else {
+        $start = $j;
+        $end = $i;
+    }
+
+    my $x = $MIDI::Simple::Length{$duration} * TICKS;
+    my $y = $end - $start + 1;
+    my $z = sprintf '%0.f', $x / $y;
+    print "Durations: $x, $y, $z\n" if $self->verbose;
+    $z = 'd' . $z;
+
+    my @slide = map { [ $z, $with_octaves[$_] ] } $start .. $end;
+    @slide = reverse @slide if $j < $i;
+    print 'Slide: ', ddc(\@slide) if $self->verbose;
+
+    return \@slide;
+}
+
 sub _find_pitch {
-    my ($self, $pitch) = @_;
-    my $i = first_index { $_ eq $pitch } @{ $self->_scale };
+    my ($self, $pitch, $scale) = @_;
+    $scale //= $self->_scale;
+    my $i = first_index { $_ eq $pitch } @$scale;
     if ($i == -1) {
         my $enharmonics = $self->_enharmonics;
         $pitch =~ s/^([A-G][#b]?)(\d+)$/$enharmonics->{$1}$2/;
-        $i = first_index { $_ eq $pitch } @{ $self->_scale };
+        $i = first_index { $_ eq $pitch } @$scale;
     }
     return $i, $pitch;
 }

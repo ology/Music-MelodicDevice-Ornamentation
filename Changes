@@ -1,6 +1,9 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Add a ->slide (AKA "glissando") ornament method.
+
+0.0401 2020-12-22 12:50:03
     - Show the trill if verbose.
     - Improve documentation.
 
