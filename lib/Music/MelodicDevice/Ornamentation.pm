@@ -43,7 +43,7 @@ Each returns a note-set specification.  This specification is a list
 of two part array-references: a B<duration> and a B<pitch>.  The list
 B<duration> component is a division of the given duration argument,
 and is based on the arithmetic of each ornament.  The list B<pitch>
-varies around the given pitch argument by the given offset, and also
+can vary around the given pitch argument by the given offset, and also
 depends on the particular ornament re-phrasing.
 
 =head1 ATTRIBUTES
