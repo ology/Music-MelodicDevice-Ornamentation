@@ -4,6 +4,7 @@ package Music::MelodicDevice::Ornamentation;
 
 our $VERSION = '0.0500';
 
+use Carp qw(croak);
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
@@ -327,11 +328,12 @@ sub _find_pitch {
     my ($self, $pitch, $scale) = @_;
     $scale //= $self->_scale;
     my $i = first_index { $_ eq $pitch } @$scale;
-    if ($i == -1) {
+    if ($i < 0) {
         my $enharmonics = $self->_enharmonics;
         $pitch =~ s/^([A-G][#b]?)(\d+)$/$enharmonics->{$1}$2/;
         $i = first_index { $_ eq $pitch } @$scale;
     }
+    croak "Unknown pitch: $pitch" if $i < 0;
     return $i, $pitch;
 }
 
@@ -341,6 +343,8 @@ __END__
 =head1 SEE ALSO
 
 The F<t/01-methods.t> and F<eg/*> programs in this distribution
+
+L<Carp>
 
 L<Data::Dumper::Compact>
 
