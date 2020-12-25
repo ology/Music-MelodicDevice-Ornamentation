@@ -299,8 +299,9 @@ sub mordent {
 
   $spec = $md->slide($duration, $from, $to);
 
-Play each note in the C<chromatic> scale between the B<from> and B<to>
-pitches, for the given B<duration>.
+Return a specification where the notes move (in the C<chromatic>
+scale) between the B<from> and B<to> pitches, for the given
+B<duration>.
 
 This ornament is also known as the "glissando."
 
