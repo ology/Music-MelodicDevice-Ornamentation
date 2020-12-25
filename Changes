@@ -1,8 +1,8 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
-    - Improve documentation slightly.
-    - Use a constant, instead of a magic literal.
+    - Improve documentation and code comments.
+    - Use constants, instead of magic literals.
 
 0.0503 2020-12-24 13:40:27
     - Improve documentation again!
