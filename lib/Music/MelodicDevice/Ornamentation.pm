@@ -165,7 +165,7 @@ accent notes.  You'll have to do that bit.
 sub grace_note {
     my ($self, $duration, $pitch, $offset) = @_;
 
-    $offset //= 1;
+    $offset //= 1; # Default one note above
 
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $grace_note = $self->_scale->[ $i + $offset ];
@@ -187,19 +187,19 @@ sub grace_note {
 
   $spec = $md->turn($duration, $pitch, $offset);
 
-The note Above, the Principle note (the B<pitch>), the note Below, the
-Principle note again.
+The note C<Above>, the C<Principle> note (the B<pitch>), the note
+C<Below>, followed by the C<Principle> note again.
 
 The default B<offset> is C<1>, but if given as C<-1>, the turn is
-"inverted" and goes: Below, Principle, Above, Principle.
+"inverted" and goes: C<Below>, C<Principle>, C<Above>, C<Principle>.
 
 =cut
 
 sub turn {
     my ($self, $duration, $pitch, $offset) = @_;
 
-    my $number = 4;
-    $offset //= 1;
+    my $number = 4; # Number of notes in the ornament
+    $offset //= 1; # Default one note above
 
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $above = $self->_scale->[ $i + $offset ];
@@ -210,7 +210,7 @@ sub turn {
     print "Durations: $x, $z\n" if $self->verbose;
     $z = 'd' . $z;
 
-    my @turn = ([$z, $above], [$z, $pitch], [$z, $below], [$z, $pitch]);;
+    my @turn = ([$z, $above], [$z, $pitch], [$z, $below], [$z, $pitch]);
     print 'Turn: ', ddc(\@turn) if $self->verbose;
 
     return \@turn;
@@ -233,8 +233,8 @@ Default offset: C<1>
 sub trill {
     my ($self, $duration, $pitch, $number, $offset) = @_;
 
-    $number ||= 2;
-    $offset //= 1;
+    $number ||= 2; # Number of notes in the ornament
+    $offset //= 1; # Default one note above
 
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
@@ -271,7 +271,7 @@ sub mordent {
     my ($self, $duration, $pitch, $offset) = @_;
 
     my $number = 4; # Finest division needed
-    $offset //= 1;
+    $offset //= 1; # Default one note above
 
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
