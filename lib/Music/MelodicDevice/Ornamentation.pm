@@ -73,7 +73,7 @@ has scale_note => (
 Default: C<chromatic>
 
 For the chromatic scale, enharmonic notes are listed as sharps.  For a
-scale with flats, a diatonic B<scale_name> must be used with a flat
+scale with flats, use a diatonic B<scale_name> with a flat
 B<scale_note>.
 
 Please see L<Music::Scales/SCALES> for a list of valid scale names.
