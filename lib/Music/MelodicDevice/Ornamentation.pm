@@ -15,6 +15,7 @@ use strictures 2;
 use namespace::clean;
 
 use constant TICKS => 96;
+use constant OCTAVES => 10;
 
 =head1 SYNOPSIS
 
@@ -96,7 +97,7 @@ sub _build__scale {
     my @scale = get_scale_notes($self->scale_note, $self->scale_name);
     print 'Scale: ', ddc(\@scale) if $self->verbose;
 
-    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. 10;
+    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. OCTAVES;
     print 'With octaves: ', ddc(\@with_octaves) if $self->verbose;
 
     return \@with_octaves;
@@ -269,7 +270,7 @@ C<D5 E5 D5>.  A chromatic lower mordent would be C<D5 C#5 D5>.
 sub mordent {
     my ($self, $duration, $pitch, $offset) = @_;
 
-    my $number = 4;
+    my $number = 4; # Finest division needed
     $offset //= 1;
 
     (my $i, $pitch) = $self->_find_pitch($pitch);
@@ -305,7 +306,7 @@ sub slide {
     my ($self, $duration, $from, $to) = @_;
 
     my @scale = get_scale_notes($self->scale_note, 'chromatic');
-    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. 10;
+    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. OCTAVES;
 
     (my $i, $from) = $self->_find_pitch($from, \@with_octaves);
     (my $j, $to) = $self->_find_pitch($to, \@with_octaves);
@@ -321,7 +322,7 @@ sub slide {
     }
 
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
-    my $y = $end - $start + 1;
+    my $y = $end - $start + 1; # Number of notes in the slide
     my $z = sprintf '%0.f', $x / $y;
     print "Durations: $x, $y, $z\n" if $self->verbose;
     $z = 'd' . $z;
