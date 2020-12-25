@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Sort the scale notes!
+    - Add more tests.
 
 0.0504 2020-12-25 08:36:45
     - Improve documentation and code comments.
