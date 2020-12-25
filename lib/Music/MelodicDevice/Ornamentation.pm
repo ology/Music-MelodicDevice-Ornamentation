@@ -156,9 +156,9 @@ Create a new C<Music::MelodicDevice::Ornamentation> object.
 
 Default offset: C<1>
 
-"Appoggiatura" means emphasis on the grace note.  "Acciaccatura" means
-emphasis on the main note.  This module doesn't accent notes.  You'll
-have to do that bit.
+I believe that "appoggiatura" means emphasis on the grace note, and
+"acciaccatura" means emphasis on the main note.  This module doesn't
+accent notes.  You'll have to do that bit.
 
 =cut
 
