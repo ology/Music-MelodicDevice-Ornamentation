@@ -311,7 +311,7 @@ sub slide {
     my ($self, $duration, $from, $to) = @_;
 
     my @scale = get_scale_notes($self->scale_note, 'chromatic');
-    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. OCTAVES;
+    my @with_octaves = map { my $o = $_; map { $_ . $o } sort @scale } 0 .. OCTAVES;
 
     (my $i, $from) = $self->_find_pitch($from, \@with_octaves);
     (my $j, $to) = $self->_find_pitch($to, \@with_octaves);
