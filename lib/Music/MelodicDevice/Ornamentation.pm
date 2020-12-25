@@ -170,6 +170,7 @@ sub grace_note {
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $grace_note = $self->_scale->[ $i + $offset ];
 
+    # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
     my $z = sprintf '%0.f', $x - $y;
@@ -205,6 +206,7 @@ sub turn {
     my $above = $self->_scale->[ $i + $offset ];
     my $below = $self->_scale->[ $i - $offset ];
 
+    # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', $x / $number;
     print "Durations: $x, $z\n" if $self->verbose;
@@ -239,6 +241,7 @@ sub trill {
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
+    # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', ($x / $number / 2);
     print "Durations: $x, $z\n" if $self->verbose;
@@ -276,6 +279,7 @@ sub mordent {
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
+    # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = sprintf '%0.f', $x / $number;
     my $z = sprintf '%0.f', $x - (2 * $y);
@@ -321,6 +325,7 @@ sub slide {
         $end = $i;
     }
 
+    # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = $end - $start + 1; # Number of notes in the slide
     my $z = sprintf '%0.f', $x / $y;
