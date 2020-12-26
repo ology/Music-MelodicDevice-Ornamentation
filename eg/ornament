@@ -8,6 +8,7 @@ use MIDI::Util;
 use Music::MelodicDevice::Ornamentation;
 
 my $note = shift || 'C';
+my $octave = shift || 4;
 my $scale = shift || 'major';
 my $ornament = shift || 'grace_note';
 my $offset = shift || 1;
@@ -19,7 +20,7 @@ my $md = Music::MelodicDevice::Ornamentation->new(
     verbose => 1,
 );
 
-my @note = ('qn', $note . 4);
+my @note = ('qn', $note . $octave);
 
 my $spec;
 
