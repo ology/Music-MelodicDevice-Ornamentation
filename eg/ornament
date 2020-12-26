@@ -19,21 +19,19 @@ my $md = Music::MelodicDevice::Ornamentation->new(
     verbose => 1,
 );
 
-for my $n (1 .. 4) {
-    my @note = ('qn', $note . 4);
+my @note = ('qn', $note . 4);
 
-    my $spec;
+my $spec;
 
-    if ($ornament eq 'trill') {
-        $spec = $md->$ornament(@note, $number, $offset);
-    }
-    elsif ($ornament eq 'slide') {
-        $spec = $md->$ornament(@note, 'C4');
-    }
-    else {
-        $spec = $md->$ornament(@note, $offset);
-    }
-
-    $spec = [ map { [ MIDI::Util::midi_format(@$_) ] } @$spec ];
-    print 'Spec: ', ddc($spec);
+if ($ornament eq 'trill') {
+    $spec = $md->$ornament(@note, $number, $offset);
 }
+elsif ($ornament eq 'slide') {
+    $spec = $md->$ornament(@note, 'C4');
+}
+else {
+    $spec = $md->$ornament(@note, $offset);
+}
+
+$spec = [ map { [ MIDI::Util::midi_format(@$_) ] } @$spec ];
+print 'Spec: ', ddc($spec);
