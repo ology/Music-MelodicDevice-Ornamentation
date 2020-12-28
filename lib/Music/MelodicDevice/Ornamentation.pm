@@ -9,7 +9,8 @@ use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
 use Music::Duration;
-use Music::Scales qw(get_scale_notes is_scale);
+use Music::Note;
+use Music::Scales qw(get_scale_MIDI is_scale);
 use Moo;
 use strictures 2;
 use namespace::clean;
@@ -94,32 +95,10 @@ has _scale => (
 sub _build__scale {
     my ($self) = @_;
 
-    my @scale = get_scale_notes($self->scale_note, $self->scale_name);
+    my @scale = map { get_scale_MIDI($self->scale_note, $_, $self->scale_name) } -1 .. OCTAVES - 1;
     print 'Scale: ', ddc(\@scale) if $self->verbose;
 
-    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. OCTAVES;
-    print 'With octaves: ', ddc(\@with_octaves) if $self->verbose;
-
-    return \@with_octaves;
-}
-
-has _enharmonics => (
-    is        => 'lazy',
-    init_args => undef,
-);
-
-sub _build__enharmonics {
-  my ($self) = @_;
-  my %enharmonics = (
-      'C#' => 'Db',
-      'D#' => 'Eb',
-      'E#' => 'F',
-      'F#' => 'Gb',
-      'G#' => 'Ab',
-      'A#' => 'Bb',
-      'B#' => 'C',
-  );
-  return { %enharmonics, reverse %enharmonics }
+    return \@scale;
 }
 
 =head2 verbose
@@ -170,6 +149,9 @@ sub grace_note {
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $grace_note = $self->_scale->[ $i + $offset ];
 
+    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+    $grace_note = Music::Note->new($grace_note, 'midinum')->format('ISO');
+
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
@@ -206,6 +188,10 @@ sub turn {
     my $above = $self->_scale->[ $i + $offset ];
     my $below = $self->_scale->[ $i - $offset ];
 
+    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+    $above = Music::Note->new($above, 'midinum')->format('ISO');
+    $below = Music::Note->new($below, 'midinum')->format('ISO');
+
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $z = sprintf '%0.f', $x / $number;
@@ -240,6 +226,9 @@ sub trill {
 
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
+
+    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+    $alt = Music::Note->new($alt, 'midinum')->format('ISO');
 
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
@@ -279,6 +268,9 @@ sub mordent {
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
+    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+    $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
     my $y = sprintf '%0.f', $x / $number;
@@ -310,11 +302,10 @@ This ornament is also known as the "glissando."
 sub slide {
     my ($self, $duration, $from, $to) = @_;
 
-    my @scale = get_scale_notes($self->scale_note, 'chromatic');
-    my @with_octaves = map { my $o = $_; map { $_ . $o } @scale } 0 .. OCTAVES;
+    my @scale = map { get_scale_MIDI($self->scale_note, $_, $self->scale_name) } -1 .. OCTAVES - 1;
 
-    (my $i, $from) = $self->_find_pitch($from, \@with_octaves);
-    (my $j, $to) = $self->_find_pitch($to, \@with_octaves);
+    (my $i, $from) = $self->_find_pitch($from, \@scale);
+    (my $j, $to) = $self->_find_pitch($to, \@scale);
 
     my ($start, $end);
     if ($i <= $j) {
@@ -333,7 +324,7 @@ sub slide {
     print "Durations: $x, $y, $z\n" if $self->verbose;
     $z = 'd' . $z;
 
-    my @slide = map { [ $z, $with_octaves[$_] ] } $start .. $end;
+    my @slide = map { [ $z, Music::Note->new($scale[$_], 'midinum')->format('ISO') ] } $start .. $end;
     @slide = reverse @slide if $j < $i;
     print 'Slide: ', ddc(\@slide) if $self->verbose;
 
@@ -342,14 +333,14 @@ sub slide {
 
 sub _find_pitch {
     my ($self, $pitch, $scale) = @_;
+
     $scale //= $self->_scale;
+
+    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum');
+
     my $i = first_index { $_ eq $pitch } @$scale;
-    if ($i < 0) {
-        my $enharmonics = $self->_enharmonics;
-        $pitch =~ s/^([A-G][#b]?)(\d+)$/$enharmonics->{$1}$2/;
-        $i = first_index { $_ eq $pitch } @$scale;
-    }
     croak "Unknown pitch: $pitch" if $i < 0;
+
     return $i, $pitch;
 }
 
