@@ -302,7 +302,7 @@ This ornament is also known as the "glissando."
 sub slide {
     my ($self, $duration, $from, $to) = @_;
 
-    my @scale = map { get_scale_MIDI($self->scale_note, $_, $self->scale_name) } -1 .. OCTAVES - 1;
+    my @scale = map { get_scale_MIDI($self->scale_note, $_, 'chromatic') } -1 .. OCTAVES - 1;
 
     (my $i, $from) = $self->_find_pitch($from, \@scale);
     (my $j, $to) = $self->_find_pitch($to, \@scale);
