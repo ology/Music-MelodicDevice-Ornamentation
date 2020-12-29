@@ -1,6 +1,8 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+
+0.0600 2020-12-28 08:49:24
     - Add the eg/ornament program.
     - Use midinums for the internal scale, and use Music::Note to convert.
 
