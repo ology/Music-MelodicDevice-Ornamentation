@@ -154,7 +154,7 @@ sub grace_note {
 
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
-    my $y = $MIDI::Simple::Length{yn} * TICKS; # Thirty-second note
+    my $y = $MIDI::Simple::Length{xn} * TICKS; # Thirty-second note
     my $z = sprintf '%0.f', $x - $y;
     print "Durations: $x, $y, $z\n" if $self->verbose;
     $y = 'd' . $y;
