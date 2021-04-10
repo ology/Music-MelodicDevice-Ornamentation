@@ -2,6 +2,7 @@ Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
     - Update the eg/ode-to-joy program.
+    - Update the grace_note method for the new Music::Duration.
 
 0.0601 2020-12-29 13:46:43
     - Fix the scale name in the ->slide ornament.
