@@ -189,13 +189,17 @@ sub turn {
     my $number = 4; # Number of notes in the ornament
     $offset //= 1; # Default one note above
 
+    my $named = $pitch =~ /[A-G]/ ? 1 : 0;
+
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $above = $self->_scale->[ $i + $offset ];
     my $below = $self->_scale->[ $i - $offset ];
 
-    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-    $above = Music::Note->new($above, 'midinum')->format('ISO');
-    $below = Music::Note->new($below, 'midinum')->format('ISO');
+    if ($named) {
+        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+        $above = Music::Note->new($above, 'midinum')->format('ISO');
+        $below = Music::Note->new($below, 'midinum')->format('ISO');
+    }
 
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
