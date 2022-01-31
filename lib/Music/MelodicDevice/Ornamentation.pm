@@ -174,8 +174,12 @@ sub grace_note {
 The note C<Above>, the C<Principle> note (the B<pitch>), the note
 C<Below>, followed by the C<Principle> note again.
 
-The default B<offset> is C<1>, but if given as C<-1>, the turn is
-"inverted" and goes: C<Below>, C<Principle>, C<Above>, C<Principle>.
+For example: C<D4 C4 B3 C4> (where C<C4> is the Principle note)
+
+Default offset: C<1>
+
+But if the offset is given as C<-1>, the turn is "inverted" and goes:
+C<Below>, C<Principle>, C<Above>, C<Principle>.
 
 =cut
 
@@ -252,8 +256,10 @@ sub trill {
 "A rapid alternation between an indicated note [the B<pitch>], the
 note above or below, and the indicated note again."
 
-An B<offset> of C<1> (the default) returns an upper mordent one pitch
-away.  An B<offset> of C<-1> returns a lower mordent.
+Default offset: C<1>
+
+An B<offset> of C<1> returns an upper mordent one pitch away.  An
+B<offset> of C<-1> returns a lower mordent.
 
 So if the B<pitch> is C<D5>, a diatonic upper mordent, in say C major,
 would be C<D5 E5 D5>.  A chromatic lower mordent would be C<D5 C#5 D5>.
