@@ -27,7 +27,7 @@ use constant OCTAVES => 10;
   $md = Music::MelodicDevice::Ornamentation->new( # diatonic
     scale_note => 'C',
     scale_name => 'major',
-    verbose => 1,
+    verbose    => 1,
   );
 
   my $spec = $md->grace_note('qn', 'D5', -1);
@@ -123,7 +123,7 @@ has verbose => (
   $x = Music::MelodicDevice::Ornamentation->new(
     scale_note => $scale_note,
     scale_name => $scale_name,
-    verbose => $verbose,
+    verbose    => $verbose,
   );
 
 Create a new C<Music::MelodicDevice::Ornamentation> object.
