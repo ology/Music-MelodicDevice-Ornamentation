@@ -237,11 +237,15 @@ sub trill {
     $number ||= 2; # Number of notes in the ornament
     $offset //= 1; # Default one note above
 
+    my $named = $pitch =~ /[A-G]/ ? 1 : 0;
+
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
-    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-    $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+    if ($named) {
+        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+    }
 
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
@@ -280,11 +284,15 @@ sub mordent {
     my $number = 4; # Finest division needed
     $offset //= 1; # Default one note above
 
+    my $named = $pitch =~ /[A-G]/ ? 1 : 0;
+
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $alt = $self->_scale->[ $i + $offset ];
 
-    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-    $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+    if ($named) {
+        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+    }
 
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
