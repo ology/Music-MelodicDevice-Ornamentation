@@ -143,11 +143,15 @@ sub grace_note {
 
     $offset //= 1; # Default one note above
 
+    my $named = $pitch =~ /[A-G]/ ? 1 : 0;
+
     (my $i, $pitch) = $self->_find_pitch($pitch);
     my $grace_note = $self->_scale->[ $i + $offset ];
 
-    $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-    $grace_note = Music::Note->new($grace_note, 'midinum')->format('ISO');
+    if ($named) {
+        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
+        $grace_note = Music::Note->new($grace_note, 'midinum')->format('ISO');
+    }
 
     # Compute the ornament durations
     my $x = $MIDI::Simple::Length{$duration} * TICKS;
@@ -339,7 +343,8 @@ sub _find_pitch {
 
     $scale //= $self->_scale;
 
-    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum');
+    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum')
+        if $pitch =~ /[A-G]/;
 
     my $i = first_index { $_ eq $pitch } @$scale;
     croak "Unknown pitch: $pitch" if $i < 0;
