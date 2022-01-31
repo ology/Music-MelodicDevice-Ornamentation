@@ -50,10 +50,11 @@ depends on the particular ornament re-phrasing.
 
 Since the point is likely to use MIDI-Perl to render these ornaments,
 to audio, it is handy to know that the pitches in these specifications
-can be translated to a readable format like this:
+can be translated like this:
 
-  $spec = [ map { [ MIDI::Util::midi_format(@$_) ] } @$spec ];
-  $score->n(@$_) for @$spec;
+  my @spec = ([qw(en C4)], [qw(sn C#4)], [qw(qn D4)], ...);
+  @spec = map { [ MIDI::Util::midi_format(@$_) ] } @spec;
+  $score->n(@$_) for @spec;
 
 =head1 ATTRIBUTES
 
