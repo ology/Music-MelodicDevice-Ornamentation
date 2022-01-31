@@ -46,7 +46,7 @@ of two part array-references: a B<duration> and a B<pitch>.
 
 Since the point is likely to use MIDI-Perl to render these ornaments,
 to audio, it is handy to know that the pitches in these specifications
-can be translated like this:
+can be translated with the L<MIDI::Util> C<midi_format> function:
 
   my @spec = ([qw(en C4)], [qw(sn C#4)], [qw(qn D4)], ...);
   @spec = map { [ MIDI::Util::midi_format(@$_) ] } @spec;
