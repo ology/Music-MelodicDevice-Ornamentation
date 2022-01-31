@@ -35,6 +35,13 @@ $expect = [['d24','C#5'], ['d24','D5'], ['d24','D#5'], ['d24','D5']];
 $got = $obj->turn('qn', 'D5', -1);
 is_deeply $got, $expect, 'turn invert';
 
+#$expect = [['d24',75], ['d24',74], ['d24',73], ['d24',74]];
+#$got = $obj->turn('qn', 74, 1);
+#is_deeply $got, $expect, 'turn';
+#$expect = [['d24','C#5'], ['d24','D5'], ['d24','D#5'], ['d24','D5']];
+#$got = $obj->turn('qn', 'D5', -1);
+#is_deeply $got, $expect, 'turn invert';
+
 $expect = [['d24','D5'], ['d24','D#5'], ['d24','D5'], ['d24','D#5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
 is_deeply $got, $expect, 'trill upper';
@@ -66,6 +73,16 @@ $got = $obj->grace_note('qn', 'D5', 0);
 is_deeply $got, $expect, 'grace_note same';
 $expect = [['d12', 'C5'], ['d84', 'D5']];
 $got = $obj->grace_note('qn', 'D5', -1);
+is_deeply $got, $expect, 'grace_note lower';
+
+$expect = [['d12', 76], ['d84', 74]];
+$got = $obj->grace_note('qn', 74, 1);
+is_deeply $got, $expect, 'grace_note upper';
+$expect = [['d12', 74], ['d84', 74]];
+$got = $obj->grace_note('qn', 74, 0);
+is_deeply $got, $expect, 'grace_note same';
+$expect = [['d12', 72], ['d84', 74]];
+$got = $obj->grace_note('qn', 74, -1);
 is_deeply $got, $expect, 'grace_note lower';
 
 $expect = [['d24','E5'], ['d24','D5'], ['d24','C5'], ['d24','D5']];
