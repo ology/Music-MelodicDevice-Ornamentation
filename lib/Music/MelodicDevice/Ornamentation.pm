@@ -48,8 +48,9 @@ If the B<pitch> is given as an integer, then specs with integers
 are returned.
 
 Since the point is likely to use MIDI-Perl to render these ornaments,
-to audio, it is handy to know that the pitches in these specifications
-can be translated with the L<MIDI::Util> C<midi_format> function:
+to audio, it is handy to know that named pitches in these
+specifications can be translated with the L<MIDI::Util>
+C<midi_format> function:
 
   my @spec = ([qw(en C4)], [qw(sn C#4)], [qw(qn D4)], ...);
   @spec = map { [ MIDI::Util::midi_format(@$_) ] } @spec;
