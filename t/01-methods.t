@@ -49,6 +49,13 @@ $expect = [['d24','D5'], ['d24','C#5'], ['d24','D5'], ['d24','C#5']];
 $got = $obj->trill('qn', 'D5', 2, -1);
 is_deeply $got, $expect, 'trill lower';
 
+$expect = [['d24',74], ['d24',75], ['d24',74], ['d24',75]];
+$got = $obj->trill('qn', 74, 2, 1);
+is_deeply $got, $expect, 'trill upper';
+$expect = [['d24',74], ['d24',73], ['d24',74], ['d24',73]];
+$got = $obj->trill('qn', 74, 2, -1);
+is_deeply $got, $expect, 'trill lower';
+
 $expect = [['d24','D5'], ['d24','D#5'], ['d48','D5']];
 $got = $obj->mordent('qn', 'D5', 1);
 is_deeply $got, $expect, 'mordent upper';
@@ -106,6 +113,13 @@ $expect = [['d24','D5'], ['d24','C5'], ['d24','D5'], ['d24','C5']];
 $got = $obj->trill('qn', 'D5', 2, -1);
 is_deeply $got, $expect, 'trill lower';
 
+$expect = [['d24',74], ['d24',76], ['d24',74], ['d24',76]];
+$got = $obj->trill('qn', 74, 2, 1);
+is_deeply $got, $expect, 'trill upper';
+$expect = [['d24',74], ['d24',72], ['d24',74], ['d24',72]];
+$got = $obj->trill('qn', 74, 2, -1);
+is_deeply $got, $expect, 'trill lower';
+
 $expect = [['d24','D5'], ['d24','E5'], ['d48','D5']];
 $got = $obj->mordent('qn', 'D5', 1);
 is_deeply $got, $expect, 'mordent upper';
@@ -158,6 +172,13 @@ $got = $obj->trill('qn', 'D5', 2, 1);
 is_deeply $got, $expect, 'trill upper';
 $expect = [['d24','D5'], ['d24','C#5'], ['d24','D5'], ['d24','C#5']];
 $got = $obj->trill('qn', 'D5', 2, -1);
+is_deeply $got, $expect, 'trill lower';
+
+$expect = [['d24',74], ['d24',76], ['d24',74], ['d24',76]];
+$got = $obj->trill('qn', 74, 2, 1);
+is_deeply $got, $expect, 'trill upper';
+$expect = [['d24',74], ['d24',73], ['d24',74], ['d24',73]];
+$got = $obj->trill('qn', 74, 2, -1);
 is_deeply $got, $expect, 'trill lower';
 
 $expect = [['d24','D5'], ['d24','E5'], ['d48','D5']];
