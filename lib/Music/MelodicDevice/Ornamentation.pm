@@ -30,11 +30,19 @@ use constant OCTAVES => 10;
     verbose    => 1,
   );
 
+  # With named notes
   my $spec = $md->grace_note('qn', 'D5', -1);
   $spec = $md->turn('qn', 'D5', 1);
   $spec = $md->trill('qn', 'D5', 2, 1);
   $spec = $md->mordent('qn', 'D5', 1);
   $spec = $md->slide('qn', 'D5', 'F5');
+
+  # With integer pitches
+  $spec = $md->grace_note('qn', 74, -1);
+  $spec = $md->turn('qn', 74, 1);
+  $spec = $md->trill('qn', 74, 2, 1);
+  $spec = $md->mordent('qn', 74, 1);
+  $spec = $md->slide('qn', 74, 77);
 
 =head1 DESCRIPTION
 
