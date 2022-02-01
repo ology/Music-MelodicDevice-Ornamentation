@@ -327,6 +327,8 @@ sub slide {
 
     my @scale = map { get_scale_MIDI($self->scale_note, $_, 'chromatic') } -1 .. OCTAVES - 1;
 
+    my $named = $from =~ /[A-G]/ ? 1 : 0;
+
     (my $i, $from) = $self->_find_pitch($from, \@scale);
     (my $j, $to) = $self->_find_pitch($to, \@scale);
 
@@ -347,7 +349,13 @@ sub slide {
     print "Durations: $x, $y, $z\n" if $self->verbose;
     $z = 'd' . $z;
 
-    my @slide = map { [ $z, Music::Note->new($scale[$_], 'midinum')->format('ISO') ] } $start .. $end;
+    my @slide;
+    if ($named) {
+        @slide = map { [ $z, Music::Note->new($scale[$_], 'midinum')->format('ISO') ] } $start .. $end;
+    }
+    else {
+        @slide = map { [ $z, $scale[$_] ] } $start .. $end;
+    }
     @slide = reverse @slide if $j < $i;
     print 'Slide: ', ddc(\@slide) if $self->verbose;
 
