@@ -38,9 +38,9 @@ is_deeply $got, $expect, 'turn invert';
 $expect = [['d24',75], ['d24',74], ['d24',73], ['d24',74]];
 $got = $obj->turn('qn', 74, 1);
 is_deeply $got, $expect, 'turn';
-#$expect = [['d24',73], ['d24',74], ['d24',75], ['d24',74]];
-#$got = $obj->turn('qn', 74, -1);
-#is_deeply $got, $expect, 'turn invert';
+$expect = [['d24',73], ['d24',74], ['d24',75], ['d24',74]];
+$got = $obj->turn('qn', 74, -1);
+is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','D#5'], ['d24','D5'], ['d24','D#5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
@@ -95,9 +95,9 @@ is_deeply $got, $expect, 'turn invert';
 $expect = [['d24',76], ['d24',74], ['d24',72], ['d24',74]];
 $got = $obj->turn('qn', 74, 1);
 is_deeply $got, $expect, 'turn';
-#$expect = [['d24',72], ['d24',74], ['d24',76], ['d24',74]];
-#$got = $obj->turn('qn', 'D5', -1);
-#is_deeply $got, $expect, 'turn invert';
+$expect = [['d24',72], ['d24',74], ['d24',76], ['d24',74]];
+$got = $obj->turn('qn', 74, -1);
+is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','E5'], ['d24','D5'], ['d24','E5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
@@ -149,9 +149,9 @@ is_deeply $got, $expect, 'turn invert';
 $expect = [['d24',76], ['d24',74], ['d24',73], ['d24',74]];
 $got = $obj->turn('qn', 74, 1);
 is_deeply $got, $expect, 'turn';
-#$expect = [['d24',73], ['d24',74], ['d24',76], ['d24',74]];
-#$got = $obj->turn('qn', 74, -1);
-#is_deeply $got, $expect, 'turn invert';
+$expect = [['d24',73], ['d24',74], ['d24',76], ['d24',74]];
+$got = $obj->turn('qn', 74, -1);
+is_deeply $got, $expect, 'turn invert';
 
 $expect = [['d24','D5'], ['d24','E5'], ['d24','D5'], ['d24','E5']];
 $got = $obj->trill('qn', 'D5', 2, 1);
