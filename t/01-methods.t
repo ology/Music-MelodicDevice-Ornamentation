@@ -77,6 +77,13 @@ $expect = [ ['d24','D5'], ['d24','C#5'], ['d24','C5'], ['d24','B4'] ];
 $got = $obj->slide('qn', 'D5', 'B4');
 is_deeply $got, $expect, 'slide down';
 
+$expect = [ ['d24',74], ['d24',75], ['d24',76], ['d24',77] ];
+$got = $obj->slide('qn', 74, 'F5');
+is_deeply $got, $expect, 'slide up';
+$expect = [ ['d24',74], ['d24',73], ['d24',72], ['d24',71] ];
+$got = $obj->slide('qn', 74, 'B4');
+is_deeply $got, $expect, 'slide down';
+
 $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [ scale_name => 'major' ];
 
 $expect = [['d12', 'E5'], ['d84', 'D5']];
@@ -208,12 +215,5 @@ is_deeply $got, $expect, 'mordent upper';
 $expect = [['d24',74], ['d24',73], ['d48',74]];
 $got = $obj->mordent('qn', 74, -1);
 is_deeply $got, $expect, 'mordent lower';
-
-$expect = [ ['d24','D5'], ['d24','D#5'], ['d24','E5'], ['d24','F5'] ];
-$got = $obj->slide('qn', 'D5', 'F5');
-is_deeply $got, $expect, 'slide up';
-$expect = [ ['d24','D5'], ['d24','C#5'], ['d24','C5'], ['d24','B4'] ];
-$got = $obj->slide('qn', 'D5', 'B4');
-is_deeply $got, $expect, 'slide down';
 
 done_testing();
