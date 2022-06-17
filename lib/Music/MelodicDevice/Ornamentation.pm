@@ -89,6 +89,8 @@ B<scale_note>.
 
 Please see L<Music::Scales/SCALES> for a list of valid scale names.
 
+=for Pod::Coverage OCTAVES
+
 =cut
 
 has scale_name => (
@@ -148,6 +150,8 @@ Default offset: C<1>
 NB: I believe that "appoggiatura" means emphasis on the grace note,
 and "acciaccatura" means emphasis on the principle note.  This module
 doesn't accent notes.  You'll have to do that bit.
+
+=for Pod::Coverage TICKS
 
 =cut
 
