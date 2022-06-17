@@ -9,11 +9,12 @@ use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
 use Music::Duration;
-use Music::Note;
 use Music::Scales qw(get_scale_MIDI is_scale);
 use Moo;
 use strictures 2;
 use namespace::clean;
+
+with('Music::PitchNum');
 
 use constant TICKS => 96;
 use constant OCTAVES => 10;
@@ -161,8 +162,8 @@ sub grace_note {
     my $grace_note = $self->_scale->[ $i + $offset ];
 
     if ($named) {
-        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-        $grace_note = Music::Note->new($grace_note, 'midinum')->format('ISO');
+        $pitch = $self->pitchname($pitch);
+        $grace_note = $self->pitchname($grace_note);
     }
 
     # Compute the ornament durations
@@ -208,9 +209,9 @@ sub turn {
     my $below = $self->_scale->[ $i - $offset ];
 
     if ($named) {
-        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-        $above = Music::Note->new($above, 'midinum')->format('ISO');
-        $below = Music::Note->new($below, 'midinum')->format('ISO');
+        $pitch = $self->pitchname($pitch);
+        $above = $self->pitchname($above);
+        $below = $self->pitchname($below);
     }
 
     # Compute the ornament durations
@@ -251,8 +252,8 @@ sub trill {
     my $alt = $self->_scale->[ $i + $offset ];
 
     if ($named) {
-        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+        $pitch = $self->pitchname($pitch);
+        $alt = $self->pitchname($alt);
     }
 
     # Compute the ornament durations
@@ -298,8 +299,8 @@ sub mordent {
     my $alt = $self->_scale->[ $i + $offset ];
 
     if ($named) {
-        $pitch = Music::Note->new($pitch, 'midinum')->format('ISO');
-        $alt = Music::Note->new($alt, 'midinum')->format('ISO');
+        $pitch = $self->pitchname($pitch);
+        $alt = $self->pitchname($alt);
     }
 
     # Compute the ornament durations
@@ -359,7 +360,7 @@ sub slide {
 
     my @slide;
     if ($named) {
-        @slide = map { [ $z, Music::Note->new($scale[$_], 'midinum')->format('ISO') ] } $start .. $end;
+        @slide = map { [ $z, $self->pitchname($scale[$_]) ] } $start .. $end;
     }
     else {
         @slide = map { [ $z, $scale[$_] ] } $start .. $end;
@@ -375,7 +376,7 @@ sub _find_pitch {
 
     $scale //= $self->_scale;
 
-    $pitch = Music::Note->new($pitch, 'ISO')->format('midinum')
+    $pitch = $self->pitchnum($pitch)
         if $pitch =~ /[A-G]/;
 
     my $i = first_index { $_ eq $pitch } @$scale;
@@ -402,8 +403,6 @@ L<MIDI::Simple>
 L<Moo>
 
 L<Music::Duration>
-
-L<Music::Note>
 
 L<Music::Scales>
 
