@@ -4,14 +4,14 @@ package Music::MelodicDevice::Ornamentation;
 
 our $VERSION = '0.0701';
 
+use strictures 2;
 use Carp qw(croak);
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
-use Music::Duration;
-use Music::Scales qw(get_scale_MIDI is_scale);
 use Moo;
-use strictures 2;
+use Music::Duration ();
+use Music::Scales qw(get_scale_MIDI is_scale);
 use namespace::clean;
 
 with('Music::PitchNum');
