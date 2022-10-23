@@ -1,6 +1,7 @@
 Revision history for Music-MelodicDevice-Ornamentation
 
 {{$NEXT}}
+    - Avoid implicit imports.
 
 0.0701 2022-06-16 21:07:01
     - Use Music::PitchNum instead of Music::Note.
