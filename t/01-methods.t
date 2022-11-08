@@ -6,6 +6,7 @@ use Test::More;
 
 use_ok 'Music::MelodicDevice::Ornamentation';
 
+subtest chromatic => sub {
 my $obj = new_ok 'Music::MelodicDevice::Ornamentation';# => [ verbose => 1 ];
 
 my $expect = [['d6', 'D#5'], ['d90', 'D5']];
@@ -83,11 +84,13 @@ is_deeply $got, $expect, 'slide up';
 $expect = [ ['d24',74], ['d24',73], ['d24',72], ['d24',71] ];
 $got = $obj->slide('qn', 74, 'B4');
 is_deeply $got, $expect, 'slide down';
+};
 
-$obj = new_ok 'Music::MelodicDevice::Ornamentation' => [ scale_name => 'major' ];
+subtest C_major => sub {
+my $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [ scale_name => 'major' ];
 
-$expect = [['d6', 'E5'], ['d90', 'D5']];
-$got = $obj->grace_note('qn', 'D5', 1);
+my $expect = [['d6', 'E5'], ['d90', 'D5']];
+my $got = $obj->grace_note('qn', 'D5', 1);
 is_deeply $got, $expect, 'grace_note upper';
 $expect = [['d6', 'D5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 0);
@@ -147,15 +150,17 @@ is_deeply $got, $expect, 'mordent upper';
 $expect = [['d24',74], ['d24',72], ['d48',74]];
 $got = $obj->mordent('qn', 74, -1);
 is_deeply $got, $expect, 'mordent lower';
+};
 
-$obj = new_ok 'Music::MelodicDevice::Ornamentation' => [
+subtest D_major => sub {
+my $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [
     scale_note => 'D',
     scale_name => 'major',
 #    verbose => 1,
 ];
 
-$expect = [['d6', 'E5'], ['d90', 'D5']];
-$got = $obj->grace_note('qn', 'D5', 1);
+my $expect = [['d6', 'E5'], ['d90', 'D5']];
+my $got = $obj->grace_note('qn', 'D5', 1);
 is_deeply $got, $expect, 'grace_note upper';
 $expect = [['d6', 'D5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 0);
@@ -215,5 +220,6 @@ is_deeply $got, $expect, 'mordent upper';
 $expect = [['d24',74], ['d24',73], ['d48',74]];
 $got = $obj->mordent('qn', 74, -1);
 is_deeply $got, $expect, 'mordent lower';
+};
 
 done_testing();
