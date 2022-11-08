@@ -8,23 +8,23 @@ use_ok 'Music::MelodicDevice::Ornamentation';
 
 my $obj = new_ok 'Music::MelodicDevice::Ornamentation';# => [ verbose => 1 ];
 
-my $expect = [['d12', 'D#5'], ['d84', 'D5']];
+my $expect = [['d6', 'D#5'], ['d90', 'D5']];
 my $got = $obj->grace_note('qn', 'D5', 1);
 is_deeply $got, $expect, 'grace_note upper';
-$expect = [['d12', 'D5'], ['d84', 'D5']];
+$expect = [['d6', 'D5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 0);
 is_deeply $got, $expect, 'grace_note same';
-$expect = [['d12', 'C#5'], ['d84', 'D5']];
+$expect = [['d6', 'C#5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', -1);
 is_deeply $got, $expect, 'grace_note lower';
 
-$expect = [['d12', 75], ['d84', 74]];
+$expect = [['d6', 75], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, 1);
 is_deeply $got, $expect, 'grace_note upper';
-$expect = [['d12', 74], ['d84', 74]];
+$expect = [['d6', 74], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, 0);
 is_deeply $got, $expect, 'grace_note same';
-$expect = [['d12', 73], ['d84', 74]];
+$expect = [['d6', 73], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, -1);
 is_deeply $got, $expect, 'grace_note lower';
 
@@ -86,23 +86,23 @@ is_deeply $got, $expect, 'slide down';
 
 $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [ scale_name => 'major' ];
 
-$expect = [['d12', 'E5'], ['d84', 'D5']];
+$expect = [['d6', 'E5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 1);
 is_deeply $got, $expect, 'grace_note upper';
-$expect = [['d12', 'D5'], ['d84', 'D5']];
+$expect = [['d6', 'D5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 0);
 is_deeply $got, $expect, 'grace_note same';
-$expect = [['d12', 'C5'], ['d84', 'D5']];
+$expect = [['d6', 'C5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', -1);
 is_deeply $got, $expect, 'grace_note lower';
 
-$expect = [['d12', 76], ['d84', 74]];
+$expect = [['d6', 76], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, 1);
 is_deeply $got, $expect, 'grace_note upper';
-$expect = [['d12', 74], ['d84', 74]];
+$expect = [['d6', 74], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, 0);
 is_deeply $got, $expect, 'grace_note same';
-$expect = [['d12', 72], ['d84', 74]];
+$expect = [['d6', 72], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, -1);
 is_deeply $got, $expect, 'grace_note lower';
 
@@ -154,23 +154,23 @@ $obj = new_ok 'Music::MelodicDevice::Ornamentation' => [
 #    verbose => 1,
 ];
 
-$expect = [['d12', 'E5'], ['d84', 'D5']];
+$expect = [['d6', 'E5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 1);
 is_deeply $got, $expect, 'grace_note upper';
-$expect = [['d12', 'D5'], ['d84', 'D5']];
+$expect = [['d6', 'D5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', 0);
 is_deeply $got, $expect, 'grace_note same';
-$expect = [['d12', 'C#5'], ['d84', 'D5']];
+$expect = [['d6', 'C#5'], ['d90', 'D5']];
 $got = $obj->grace_note('qn', 'D5', -1);
 is_deeply $got, $expect, 'grace_note lower';
 
-$expect = [['d12', 76], ['d84', 74]];
+$expect = [['d6', 76], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, 1);
 is_deeply $got, $expect, 'grace_note upper';
-$expect = [['d12', 74], ['d84', 74]];
+$expect = [['d6', 74], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, 0);
 is_deeply $got, $expect, 'grace_note same';
-$expect = [['d12', 73], ['d84', 74]];
+$expect = [['d6', 73], ['d90', 74]];
 $got = $obj->grace_note('qn', 74, -1);
 is_deeply $got, $expect, 'grace_note lower';
 
