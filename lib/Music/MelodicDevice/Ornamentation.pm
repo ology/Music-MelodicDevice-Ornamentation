@@ -2,7 +2,7 @@ package Music::MelodicDevice::Ornamentation;
 
 # ABSTRACT: Chromatic and diatonic melodic ornamentation
 
-our $VERSION = '0.0704';
+our $VERSION = '0.0705';
 
 use Moo;
 use strictures 2;
