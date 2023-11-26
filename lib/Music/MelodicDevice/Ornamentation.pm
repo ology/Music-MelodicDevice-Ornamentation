@@ -4,12 +4,12 @@ package Music::MelodicDevice::Ornamentation;
 
 our $VERSION = '0.0703';
 
+use Moo;
 use strictures 2;
 use Carp qw(croak);
 use Data::Dumper::Compact qw(ddc);
 use List::SomeUtils qw(first_index);
 use MIDI::Simple ();
-use Moo;
 use Music::Duration ();
 use Music::Scales qw(get_scale_MIDI is_scale);
 use namespace::clean;
