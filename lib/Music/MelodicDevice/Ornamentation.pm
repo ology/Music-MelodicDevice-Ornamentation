@@ -47,6 +47,12 @@ use constant OCTAVES => 10;
 
 =head1 DESCRIPTION
 
+=begin html
+
+<img src="https://raw.githubusercontent.com/ology/Music-MelodicDevice-Ornamentation/main/eg/Bach-Ornaments.png">
+
+=end html
+
 C<Music::MelodicDevice::Ornamentation> provides chromatic and diatonic
 musical melodic ornamentation methods.
 
